@@ -120,7 +120,7 @@ public class CoffeeOrderService {
     }
 
 
-    private Double findDiscountBasedOnOrderItems(List<InvoiceDTO.OrderItemDTO> orderItems, double originalPrice) {
+    public Double findDiscountBasedOnOrderItems(List<InvoiceDTO.OrderItemDTO> orderItems, double originalPrice) {
 
         double discount = 0D;
         double promotion1 = 0D;
@@ -145,6 +145,8 @@ public class CoffeeOrderService {
         // If the cart is eligible for both promotions, the promotion with the lowest cart amount should be
         // used and the other one should be ignored.
         if (promotion1 > 0 && promotion2 > 0)
+            discount = Double.min(promotion1, promotion2);
+        else
             discount = Double.max(promotion1, promotion2);
 
         return discount;
