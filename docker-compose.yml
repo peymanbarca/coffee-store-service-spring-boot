@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    container_name: db
+    image: postgres:10.3
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: app1_db_user
+      POSTGRES_PASSWORD: app1_pwd
+      POSTGRES_DB: app1_db
+    ports:
+      - 5422:5432
+    networks:
+        - one_network
+    restart:
+      always
+
+  app:
+    build: .
+    container_name: coffee-store-app
+    ports:
+      - 8084:8084
+    networks:
+        - one_network
+    depends_on:
+      - db
+
+volumes:
+  postgres-db:
+
+networks:
+  one_network:

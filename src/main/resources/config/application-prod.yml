@@ -1,0 +1,53 @@
+# ===================================================================
+# Spring Boot configuration for the "prod" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+logging:
+  level:
+    ROOT: INFO
+    io.github.jhipster: INFO
+    com.mycompany.myapp: INFO
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://x:5432/x
+    username: x
+    password: x
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      maximum-pool-size: 20
+  jpa:
+    show-sql: false
+    database: postgresql
+    properties:
+        hibernate.cache.use_second_level_cache: false
+        hibernate.cache.use_query_cache: false
+        hibernate.cache.region.factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+        hibernate.jdbc.lob.non_contextual_creation: true
+        hibernate.types.print.banner : false
+
+
+  liquibase:
+    contexts: prod
+  messages:
+    cache-duration: PT1S # 1 second, see the ISO 8601 standard
+    basename: i18n/messages
+
+
+server:
+  port: 8084
+
+
