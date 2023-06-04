@@ -101,7 +101,7 @@ First, we need to get build from the project as a jar file, by:
     mvn clean package
 
 Then, by having our database up (as mentioned in the previous sections), in the docker-compose file,
- there is a serivce for run the application. So we start the service by:
+ there is a service for run the application. So we start the service by:
     
     docker-compose up -d --build app
     
