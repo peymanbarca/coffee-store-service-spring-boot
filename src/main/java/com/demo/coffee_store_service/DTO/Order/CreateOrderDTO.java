@@ -16,11 +16,15 @@ import java.util.List;
 public class CreateOrderDTO {
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class CreateOrderToppingItemDTO {
         @NotNull public Long toppingId;
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class CreateOrderItemDTO {
         @NotNull public Long drinkId;
         public List<CreateOrderToppingItemDTO> toppings;

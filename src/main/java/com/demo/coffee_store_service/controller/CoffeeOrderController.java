@@ -6,6 +6,7 @@ import com.demo.coffee_store_service.DTO.Order.InvoiceDTO;
 import com.demo.coffee_store_service.DTO.exception.GeneralException;
 import com.demo.coffee_store_service.service.CoffeeOrderService;
 import io.micrometer.core.annotation.Timed;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class CoffeeOrderController {
         this.coffeeOrderService = coffeeOrderService;
     }
 
+    @ApiOperation(value = "Create New Order (drinks with toppings)", tags = "users")
     @RequestMapping(value = "/v1/order/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<InvoiceDTO> createOrder(@RequestBody CreateOrderDTO dto) throws GeneralException {

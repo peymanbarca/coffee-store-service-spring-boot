@@ -8,6 +8,7 @@
 
 #### This project has 3 profiles (dev, test, prod), and the default profile is dev.
  In order to start the project, first a local PostgreSQL DB is needed. Run the following in order to launch a containerized local PostgreSQL DB
+     
      docker-compose up -d db
     
 #### After that, by starting the project, the Hibernate Auto DDL is responsible for create the tables and DB migrations.    
@@ -72,13 +73,16 @@ for example on corresponding CI/CD pipeline.
 
 #### Test Coverage:
 The following services are provided with Integration Test using @SpringBootTest (inside the application context).
-Note that we can also add some Persistence Layer tests (using @DataJpaTest), and unit tests for inner functions.
+and unit tests for inner functions such as discount calculator.
+Note that we can also add some Persistence Layer tests (using @DataJpaTest).
 
     - Authorization of Admin
     - Admin Create/Update/Delete product services
     - Admin Get products services
     - Admin Get most used products services
-    - Place Order service by clients 
+    - Place(Create) Order service by users 
+    - Logic of discount calculator in different scenarios
+    
 So the test coverage of the project should be enough.
 
 # Commands:

@@ -1,4 +1,4 @@
 /**
- * Created by zevik on 8/1/20.
+ * Spring Data JPA Repositories
  */
 package com.demo.coffee_store_service.repository;

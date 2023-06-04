@@ -61,7 +61,7 @@ public class CoffeeStoreAdminTest {
         CreateProductDTO dto = new CreateProductDTO("Espresso", 5.5D, CreateProductDTO.PRODUCT_TYPE.DRINK);
         MvcResult mvcResult = callCreateProductAPI(dto, new HttpHeaders(), mockMvc);
         int status = mvcResult.getResponse().getStatus();
-        Assert.assertEquals(status, HttpStatus.UNAUTHORIZED.value());
+        Assert.assertEquals(HttpStatus.UNAUTHORIZED.value(), status);
 
     }
 
@@ -79,7 +79,7 @@ public class CoffeeStoreAdminTest {
         CreateProductDTO dto = new CreateProductDTO(ranodmProductName, 5.5D, CreateProductDTO.PRODUCT_TYPE.DRINK);
         MvcResult mvcResult = callCreateProductAPI(dto, headers, mockMvc);
         int status = mvcResult.getResponse().getStatus();
-        Assert.assertEquals(status, HttpStatus.CREATED.value());
+        Assert.assertEquals(HttpStatus.CREATED.value(), status);
 
         String responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
         log.info("Called Create API: Response Body = " + responseBody);
@@ -88,7 +88,7 @@ public class CoffeeStoreAdminTest {
         // Test Create new product with existing name (Drink)
         mvcResult = callCreateProductAPI(dto, headers, mockMvc);
         status = mvcResult.getResponse().getStatus();
-        Assert.assertEquals(status, HttpStatus.BAD_REQUEST.value());
+        Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), status);
 
         responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
         log.info("Called Create API With Existing Name: Response Body = " + responseBody);
@@ -104,12 +104,12 @@ public class CoffeeStoreAdminTest {
 
         mvcResult = callUpdateProductAPI(updateProductDTO, headers, mockMvc);
         status = mvcResult.getResponse().getStatus();
-        Assert.assertEquals(status, HttpStatus.OK.value());
+        Assert.assertEquals(HttpStatus.OK.value(), status);
 
         drinkOptional = drinkRepository.findOneByName(ranodmProductName);
         Assert.assertTrue(drinkOptional.isPresent());
         assert drinkOptional.isPresent();
-        Assert.assertEquals(drinkOptional.get().getPrice(), newPrice);
+        Assert.assertEquals(newPrice, drinkOptional.get().getPrice());
 
         responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
         log.info("Called Update API: Response Body = " + responseBody);
@@ -119,7 +119,7 @@ public class CoffeeStoreAdminTest {
         // Test Delete of the same product (Drink)
         mvcResult = callDeleteProductAPI(drinkId, CreateProductDTO.PRODUCT_TYPE.DRINK.toString(), headers, mockMvc);
         status = mvcResult.getResponse().getStatus();
-        Assert.assertEquals(status, HttpStatus.OK.value());
+        Assert.assertEquals(HttpStatus.OK.value(), status);
 
         responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
         log.info("Called Delete API: Response Body = " + responseBody);
@@ -140,11 +140,11 @@ public class CoffeeStoreAdminTest {
         // ----- Test get drink products
         MvcResult mvcResult = callGetProductsAPI(CreateProductDTO.PRODUCT_TYPE.DRINK.name(), headers, mockMvc);
         int status = mvcResult.getResponse().getStatus();
-        Assert.assertEquals(status, HttpStatus.OK.value());
+        Assert.assertEquals(HttpStatus.OK.value(), status);
 
         String responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
         ProductMenuDTO menu = (ProductMenuDTO) castStringAsObject(responseBody, ProductMenuDTO.class);
-        Assert.assertEquals(menu.getType(),CreateProductDTO.PRODUCT_TYPE.DRINK);
+        Assert.assertEquals(CreateProductDTO.PRODUCT_TYPE.DRINK, menu.getType());
         log.info("Called Get Products (Drink) API: Response Body = " + menu);
         log.info("------------------------------------");
 
@@ -152,11 +152,11 @@ public class CoffeeStoreAdminTest {
         // ----- Test get topping products
         mvcResult = callGetProductsAPI(CreateProductDTO.PRODUCT_TYPE.TOPPING.name(), headers, mockMvc);
         status = mvcResult.getResponse().getStatus();
-        Assert.assertEquals(status, HttpStatus.OK.value());
+        Assert.assertEquals(HttpStatus.OK.value(), status);
 
         responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
         menu = (ProductMenuDTO) castStringAsObject(responseBody, ProductMenuDTO.class);
-        Assert.assertEquals(menu.getType(),CreateProductDTO.PRODUCT_TYPE.TOPPING);
+        Assert.assertEquals(CreateProductDTO.PRODUCT_TYPE.TOPPING, menu.getType());
 
         log.info("Called Get Products (Topping) API: Response Body = " + menu);
         log.info("------------------------------------");

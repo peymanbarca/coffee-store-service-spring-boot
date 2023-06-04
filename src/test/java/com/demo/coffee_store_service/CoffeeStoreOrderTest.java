@@ -1,6 +1,11 @@
 package com.demo.coffee_store_service;
 
+import com.demo.coffee_store_service.DTO.Order.CreateOrderDTO;
 import com.demo.coffee_store_service.DTO.Order.InvoiceDTO;
+import com.demo.coffee_store_service.domain.Drink;
+import com.demo.coffee_store_service.domain.Topping;
+import com.demo.coffee_store_service.repository.DrinkRepository;
+import com.demo.coffee_store_service.repository.ToppingRepository;
 import com.demo.coffee_store_service.service.CoffeeOrderService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,15 +16,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
+import static com.demo.coffee_store_service.Utils.CreateRequestUtil.callCreateOrderAPI;
+import static com.demo.coffee_store_service.Utils.CreateRequestUtil.castStringAsObject;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
@@ -45,6 +55,12 @@ public class CoffeeStoreOrderTest {
 
     @Autowired
     private CoffeeOrderService coffeeOrderService;
+
+    @Autowired
+    private DrinkRepository drinkRepository;
+
+    @Autowired
+    private ToppingRepository toppingRepository;
 
     @Test
     public void testDiscountLogic1() {
@@ -125,12 +141,76 @@ public class CoffeeStoreOrderTest {
         double calculatedDiscount = coffeeOrderService.findDiscountBasedOnOrderItems(
                 orderItems, originalPrice);
 
-        Assert.assertEquals(calculatedDiscount, 3, 0D);
+        Assert.assertEquals(calculatedDiscount, 0.25 * originalPrice, 0D);
 
 
     }
 
 
     @Test
-    public void testFunctionalityOfPlaceOrderAPI() throws Exception {}
+    public void testFunctionalityOfCreateOrderAPI() throws Exception {
+
+        log.info(" --------> Running Test : testFunctionalityOfCreateOrderAPI");
+
+        // In order to this test be successful, we need at least some drinks and toppings available in the database.
+        // So by consider that at least 3 drinks and toppings are available, this should be run.
+
+
+        Page<Drink> drinks = drinkRepository.findAll(Pageable.ofSize(3));
+        Page<Topping> toppings = toppingRepository.findAll(Pageable.ofSize(3));
+
+        if (drinks.getContent().size() == 3 && toppings.getContent().size() == 3) {
+
+            // create a sample order items using available products (drinks and toppings)
+            List<CreateOrderDTO.CreateOrderItemDTO> items = new ArrayList<>();
+
+            items.add(new CreateOrderDTO.CreateOrderItemDTO(drinks.getContent().get(0).getId(),
+                    Arrays.asList(
+                            new CreateOrderDTO.CreateOrderToppingItemDTO(toppings.getContent().get(0).getId()),
+                            new CreateOrderDTO.CreateOrderToppingItemDTO(toppings.getContent().get(1).getId())
+                    )));
+            items.add(new CreateOrderDTO.CreateOrderItemDTO(drinks.getContent().get(1).getId(),
+                    Arrays.asList(
+                            new CreateOrderDTO.CreateOrderToppingItemDTO(toppings.getContent().get(0).getId()),
+                            new CreateOrderDTO.CreateOrderToppingItemDTO(toppings.getContent().get(1).getId()),
+                            new CreateOrderDTO.CreateOrderToppingItemDTO(toppings.getContent().get(2).getId())
+                    )));
+            items.add(new CreateOrderDTO.CreateOrderItemDTO(drinks.getContent().get(2).getId(),
+                    Arrays.asList(
+                            new CreateOrderDTO.CreateOrderToppingItemDTO(toppings.getContent().get(0).getId()),
+                            new CreateOrderDTO.CreateOrderToppingItemDTO(toppings.getContent().get(2).getId())
+                    )));
+
+            CreateOrderDTO dto = new CreateOrderDTO(items);
+
+
+            MvcResult mvcResult = callCreateOrderAPI(dto, new HttpHeaders(), mockMvc);
+            int status = mvcResult.getResponse().getStatus();
+            Assert.assertEquals(HttpStatus.OK.value(), status);
+
+            // Evaluate Expectations (for original amount)
+            final Double[] originalPriceExpected = {0D};
+            items.forEach(item -> {
+                originalPriceExpected[0] += drinkRepository.findById(item.getDrinkId()).get().getPrice();
+                item.getToppings().forEach(topping -> {
+                    originalPriceExpected[0] += toppingRepository.findById(topping.getToppingId()).get().getPrice();
+                });
+            });
+
+            String responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
+            InvoiceDTO invoice = (InvoiceDTO) castStringAsObject(responseBody, InvoiceDTO.class);
+            Assert.assertEquals(originalPriceExpected[0], invoice.getOriginalAmount());
+
+
+            log.info("Called Create Order API: Response Body = " + invoice);
+            log.info("------------------------------------");
+        }
+        else {
+            log.info(" --------> There is not enough data (drinks and toppings) available to perform this test, " +
+                    " At least 3 drinks and toppings should be existed in database.");
+        }
+
+
+
+    }
 }

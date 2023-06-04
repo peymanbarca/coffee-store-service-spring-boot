@@ -27,8 +27,6 @@ public class CoffeeOrderService {
 
     private final Logger log = LoggerFactory.getLogger(CoffeeOrderService.class);
 
-    private final MessageService messageService;
-
     private final DrinkRepository drinkRepository;
 
     private final ToppingRepository toppingRepository;
@@ -38,10 +36,9 @@ public class CoffeeOrderService {
     private final OrderItemsRepository orderItemsRepository;
 
     @Autowired
-    public CoffeeOrderService(MessageService messageService, DrinkRepository drinkRepository,
+    public CoffeeOrderService(DrinkRepository drinkRepository,
                               ToppingRepository toppingRepository, OrderRepository orderRepository,
                               OrderItemsRepository orderItemsRepository) {
-        this.messageService = messageService;
         this.drinkRepository = drinkRepository;
         this.toppingRepository = toppingRepository;
         this.orderRepository = orderRepository;
@@ -143,9 +140,9 @@ public class CoffeeOrderService {
         }
 
         // If the cart is eligible for both promotions, the promotion with the lowest cart amount should be
-        // used and the other one should be ignored.
+        // used and the other one should be ignored. (So we pick the maximum one)
         if (promotion1 > 0 && promotion2 > 0)
-            discount = Double.min(promotion1, promotion2);
+            discount = Double.max(promotion1, promotion2);
         else
             discount = Double.max(promotion1, promotion2);
 

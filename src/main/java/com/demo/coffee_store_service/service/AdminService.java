@@ -103,7 +103,7 @@ public class AdminService {
             Optional<Drink> possibleExistedDrink = drinkRepository.findById(dto.getId());
             if (!possibleExistedDrink.isPresent()) {
                 log.error("Tried to update drink product that not existed");
-                throw new GeneralException(OperationResponse.ResponseStatusEnum.BAD_REQUEST,
+                throw new GeneralException(OperationResponse.ResponseStatusEnum.NOT_FOUND,
                         messageService.getMessage("error.request.drink.notFound"));
             }
 
@@ -119,7 +119,7 @@ public class AdminService {
             Optional<Topping> possibleExistedTopping = toppingRepository.findById(dto.getId());
             if (!possibleExistedTopping.isPresent()) {
                 log.error("Tried to update topping product that not existed");
-                throw new GeneralException(OperationResponse.ResponseStatusEnum.BAD_REQUEST,
+                throw new GeneralException(OperationResponse.ResponseStatusEnum.NOT_FOUND,
                         messageService.getMessage("error.request.topping.notFound"));
             }
 
@@ -145,7 +145,7 @@ public class AdminService {
             Optional<Drink> possibleExistedDrink = drinkRepository.findById(id);
             if (!possibleExistedDrink.isPresent()) {
                 log.error("Tried to delete drink product that not existed");
-                throw new GeneralException(OperationResponse.ResponseStatusEnum.BAD_REQUEST,
+                throw new GeneralException(OperationResponse.ResponseStatusEnum.NOT_FOUND,
                         messageService.getMessage("error.request.drink.notFound"));
             }
 
@@ -159,7 +159,7 @@ public class AdminService {
             Optional<Topping> possibleExistedTopping = toppingRepository.findById(id);
             if (!possibleExistedTopping.isPresent()) {
                 log.error("Tried to delete topping product that not existed");
-                throw new GeneralException(OperationResponse.ResponseStatusEnum.BAD_REQUEST,
+                throw new GeneralException(OperationResponse.ResponseStatusEnum.NOT_FOUND,
                         messageService.getMessage("error.request.topping.notFound"));
             }
 

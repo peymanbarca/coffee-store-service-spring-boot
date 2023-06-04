@@ -4,6 +4,7 @@ package com.demo.coffee_store_service.Utils;
 
 import com.demo.coffee_store_service.DTO.Admin.CreateProductDTO;
 import com.demo.coffee_store_service.DTO.Admin.UpdateProductDTO;
+import com.demo.coffee_store_service.DTO.Order.CreateOrderDTO;
 import com.google.gson.Gson;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -72,6 +73,20 @@ public class CreateRequestUtil {
 
     }
 
+    public static MvcResult callCreateOrderAPI(CreateOrderDTO body, HttpHeaders headers, MockMvc mockMvc) throws Exception {
+
+        Gson gson = new Gson();
+        String json = gson.toJson(body);
+
+        return mockMvc.perform(post("/coffeeStoreService/v1/order/create")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+                .headers(headers)
+                .contentType(APPLICATION_JSON))
+                .andReturn();
+
+
+    }
 
     public static Object castStringAsObject(String jsonString, Class object){
         Gson gson = new Gson();
