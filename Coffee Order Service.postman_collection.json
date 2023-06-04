@@ -1,0 +1,409 @@
+{
+	"info": {
+		"_postman_id": "1558c8f0-c393-436f-b6a8-7ad6520d47f7",
+		"name": "Coffee Order Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2533794"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Delete Topping Product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/delete?id=6&type=TOPPING",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								},
+								{
+									"key": "type",
+									"value": "TOPPING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Most Used Products (Toppings)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/mostUsed?type=TOPPING",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"mostUsed"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "TOPPING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Most Used Products (Drink)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/mostUsed?type=DRINK",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"mostUsed"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "DRINK"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Topping Products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/topping/all",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"topping",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Drink Products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/drink/all",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"drink",
+								"all"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Drink",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\":2,\n  \"name\": \"Mocha\",\n  \"price\" : 6,\n  \"type\" : \"DRINK\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product Drink",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Mocha\",\n  \"price\" : 6,\n  \"type\" : \"DRINK\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Topping",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1,\n  \"name\": \"Chocolate sauce\",\n  \"price\" : 5,\n  \"type\" : \"TOPPING\"   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product Topping",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "SECRET_KEY",
+								"value": "MY_COFFEE_STORE_SECRET_KEY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Chocolate sauce\",\n  \"price\" : 5,\n  \"type\" : \"TOPPING\"   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/admin/product/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"admin",
+								"product",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\": [\n        {\n            \"drinkId\": 2,\n            \"toppings\": [\n                {\n                    \"toppingId\": 1\n                },\n                {\n                    \"toppingId\": 3\n                }\n            ]\n        },\n        {\n            \"drinkId\": 3,\n            \"toppings\": [\n                {\n                    \"toppingId\": 3\n                },\n                {\n                    \"toppingId\": 4\n                }\n            ]\n        },\n        {\n            \"drinkId\": 4,\n            \"toppings\": [\n                {\n                    \"toppingId\": 1\n                },\n                {\n                    \"toppingId\": 3\n                },\n                {\n                    \"toppingId\": 4\n                }\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.1.1:8084/coffeeStoreService/v1/order/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"1",
+								"1"
+							],
+							"port": "8084",
+							"path": [
+								"coffeeStoreService",
+								"v1",
+								"order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

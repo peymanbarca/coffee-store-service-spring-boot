@@ -158,11 +158,31 @@ public class CoffeeStoreAdminTest {
         menu = (ProductMenuDTO) castStringAsObject(responseBody, ProductMenuDTO.class);
         Assert.assertEquals(CreateProductDTO.PRODUCT_TYPE.TOPPING, menu.getType());
 
-        log.info("Called Get Products (Topping) API: Response Body = " + menu);
+        log.info("Called Get Products (Topping) API: Response Body = " + menu.toString());
         log.info("------------------------------------");
 
     }
 
+
+
+    @Test
+    public void testAdminFunctionalityOfFetchMostUsedProducts() throws Exception {
+
+        log.info(" --------> Running Test : testAdminFunctionalityOfFetchMostUsedProducts");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(SecretKeyFilter.SECRET_KEY_HEADER_NAME, SecretKeyFilter.SECRET_KEY_HEADER_VALUE);
+
+        // ----- Test get most used toppings
+        MvcResult mvcResult = callGetMostUsedProductsAPI(CreateProductDTO.PRODUCT_TYPE.TOPPING.name(), headers, mockMvc);
+        int status = mvcResult.getResponse().getStatus();
+        Assert.assertEquals(HttpStatus.OK.value(), status);
+
+        String responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
+        log.info("Called Get Most Used Products (Topping) API: Response Body = " + responseBody);
+        log.info("------------------------------------");
+
+    }
 
 
 

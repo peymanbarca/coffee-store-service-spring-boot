@@ -202,7 +202,7 @@ public class CoffeeStoreOrderTest {
             Assert.assertEquals(originalPriceExpected[0], invoice.getOriginalAmount());
 
 
-            log.info("Called Create Order API: Response Body = " + invoice);
+            log.info("Called Create Order API: Response Body = " + invoice.toString());
             log.info("------------------------------------");
         }
         else {

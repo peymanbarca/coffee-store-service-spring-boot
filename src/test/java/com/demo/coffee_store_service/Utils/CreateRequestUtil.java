@@ -73,6 +73,16 @@ public class CreateRequestUtil {
 
     }
 
+    public static MvcResult callGetMostUsedProductsAPI(String type, HttpHeaders headers, MockMvc mockMvc) throws Exception {
+
+        return mockMvc.perform(get("/coffeeStoreService/v1/admin/product/mostUsed"
+                .concat("?").concat("type=").concat(type))
+                .headers(headers)
+                .contentType(APPLICATION_JSON))
+                .andReturn();
+
+    }
+
     public static MvcResult callCreateOrderAPI(CreateOrderDTO body, HttpHeaders headers, MockMvc mockMvc) throws Exception {
 
         Gson gson = new Gson();

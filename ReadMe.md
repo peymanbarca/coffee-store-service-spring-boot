@@ -20,7 +20,9 @@ for APIs and the detail of each service is provided as bellow:
 ### Swagger ui
    
    **http://127.0.1.1:8084/swagger-ui.html**
-    
+
+Note that the Postman collection of APIs is also available in this file: Coffee Order Service.postman_collection.json
+
 #### Admin API
 These APIs consumed by Admin of the application:
 
