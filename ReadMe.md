@@ -1,4 +1,3 @@
-# BESTSELLER JAVA Technical Challenge
 
 
 ## A Coffee Store Service Application
