@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by zevik on 6/1/23.
- */
 @Entity
 @Table(name = "topping")
 @Data

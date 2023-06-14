@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by zevik on 6/2/23.
- */
+
 @Entity
 @Table(name = "order_items")
 @Data

@@ -39,18 +39,25 @@ public class CoffeeStoreAdminTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
     private WebApplicationContext webApplicationContext;
+
+    private DrinkRepository drinkRepository;
+
+    @Autowired
+    public CoffeeStoreAdminTest(DrinkRepository drinkRepository,
+                                WebApplicationContext webApplicationContext, MockMvc mockMvc) {
+        this.mockMvc = mockMvc;
+        this.webApplicationContext = webApplicationContext;
+        this.drinkRepository = drinkRepository;
+    }
 
     @Before
     public void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
     }
 
-    @Autowired private DrinkRepository drinkRepository;
 
     @Test
     public void testAdminAuthorization() throws Exception {

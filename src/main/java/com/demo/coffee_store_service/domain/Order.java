@@ -9,9 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-/**
- * Created by zevik on 6/2/23.
- */
+
 @Entity
 @Table(name = "orders")
 @Data

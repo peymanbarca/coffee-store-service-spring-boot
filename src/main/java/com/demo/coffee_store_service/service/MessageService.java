@@ -19,8 +19,12 @@ public class MessageService {
 
     private final Logger log = LoggerFactory.getLogger(MessageService.class);
 
-    @Autowired private MessageSource messageSource;
+    private final MessageSource messageSource;
 
+    @Autowired
+    public MessageService(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
 
     /**

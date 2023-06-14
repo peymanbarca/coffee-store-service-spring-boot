@@ -16,7 +16,6 @@
 logging:
   level:
     ROOT: DEBUG
-    io.github.jhipster: DEBUG
     com.mycompany.myapp: DEBUG
 
 spring:

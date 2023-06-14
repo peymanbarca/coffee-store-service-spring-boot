@@ -32,9 +32,7 @@ import static com.demo.coffee_store_service.Utils.CreateRequestUtil.callCreateOr
 import static com.demo.coffee_store_service.Utils.CreateRequestUtil.castStringAsObject;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-/**
- * Created by zevik on 6/3/23.
- */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {CoffeeStoreServiceApplication.class})
 @AutoConfigureMockMvc
@@ -42,25 +40,30 @@ public class CoffeeStoreOrderTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
     private WebApplicationContext webApplicationContext;
+
+    private CoffeeOrderService coffeeOrderService;
+
+    private DrinkRepository drinkRepository;
+
+    private ToppingRepository toppingRepository;
+
+    @Autowired
+    public CoffeeStoreOrderTest(CoffeeOrderService coffeeOrderService, DrinkRepository drinkRepository, ToppingRepository toppingRepository,
+                                WebApplicationContext webApplicationContext, MockMvc mockMvc) {
+        this.mockMvc = mockMvc;
+        this.webApplicationContext = webApplicationContext;
+        this.coffeeOrderService = coffeeOrderService;
+        this.drinkRepository = drinkRepository;
+        this.toppingRepository = toppingRepository;
+    }
 
     @Before
     public void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
     }
-
-    @Autowired
-    private CoffeeOrderService coffeeOrderService;
-
-    @Autowired
-    private DrinkRepository drinkRepository;
-
-    @Autowired
-    private ToppingRepository toppingRepository;
 
     @Test
     public void testDiscountLogic1() {

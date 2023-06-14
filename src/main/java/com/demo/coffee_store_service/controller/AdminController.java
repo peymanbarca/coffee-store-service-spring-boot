@@ -27,9 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.List;
 
-/**
- * Created by zevik on 6/1/23.
- */
+
 @Controller
 @RequestMapping("/coffeeStoreService")
 public class AdminController {

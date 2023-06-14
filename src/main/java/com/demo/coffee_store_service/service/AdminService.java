@@ -21,9 +21,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by zevik on 6/1/23.
- */
 @Service
 public class AdminService {
 

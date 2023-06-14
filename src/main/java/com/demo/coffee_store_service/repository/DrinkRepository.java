@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-/**
- * Created by zevik on 9/30/22.
- */
+
 @Repository
 public interface DrinkRepository extends JpaRepository<Drink, Long> {
     Optional<Drink> findOneByName(String name);

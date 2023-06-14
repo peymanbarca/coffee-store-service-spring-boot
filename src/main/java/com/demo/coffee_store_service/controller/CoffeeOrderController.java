@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.text.ParseException;
 
 
-/**
- * Created by zevik on 9/30/22.
- */
 @Controller
 @RequestMapping("/coffeeStoreService")
 public class CoffeeOrderController {

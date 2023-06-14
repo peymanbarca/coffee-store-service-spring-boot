@@ -15,9 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 
-/**
- * Created by zevik on 9/1/20.
- */
+
 public class CreateRequestUtil {
 
 

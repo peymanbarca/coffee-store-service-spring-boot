@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
 
-/**
- * Created by zevik on 6/2/23.
- */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SecretKeyFilter implements Filter {
